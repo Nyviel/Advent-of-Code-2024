@@ -47,14 +47,10 @@ bool FindCombination(long target, List<long> options, bool part1)
     }
 
     if (options.Count == 0)
-    {
         return false;
-    }
 
     if (options.Count == 1)
-    {
-        return options[0] == sum;
-    }
+        return options[0] == target;
 
     List<long> permutations = new List<long> { options[0] + options[1], options[0] * options[1] };
     if (!part1)
