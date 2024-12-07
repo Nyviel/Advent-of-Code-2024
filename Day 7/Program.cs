@@ -31,14 +31,19 @@ bool FindCombination(long target, List<long> options, bool part1)
 {
     List<long> calculateNewPerms(List<long> perms, long nextVal)
     {
-        return perms
-            .SelectMany(perm => new[]
+        List<long> newPerms = [];
+
+        foreach (var perm in perms)
+        {
+            newPerms.Add(perm + nextVal);
+            newPerms.Add(perm * nextVal);
+            if (!part1)
             {
-                perm + nextVal,
-                perm * nextVal,
-                (!part1) ? long.Parse(perm.ToString() + nextVal.ToString()) : 0
-            })
-            .ToList();
+                newPerms.Add(long.Parse(perm.ToString() + nextVal.ToString()));
+            }
+        }
+
+        return newPerms;
     }
 
     if (options.Count == 0)
